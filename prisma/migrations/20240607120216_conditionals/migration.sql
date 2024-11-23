@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `order` MODIFY `area` VARCHAR(191) NULL,
+    ALTER COLUMN `total` DROP DEFAULT;

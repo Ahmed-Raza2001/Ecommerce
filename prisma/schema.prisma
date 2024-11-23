@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// model Item {
+//   id          Int       @id @default(autoincrement())
+//   name        String
+//   description String
+//   image       String
+//   price       Int
+//   itemRemarks String
+//   options     Options[]
+//   Order       Order?    @relation(fields: [orderId], references: [id])
+//   orderId     Int?
+//   quantity Int
+// }
+
+// model Options {
+//   id     Int    @id @default(autoincrement())
+//   name   String
+//   price  Int
+//   Item   Item?  @relation(fields: [itemId], references: [id])
+//   itemId Int?
+// }
+
+model Order {
+  id                   Int      @id @default(autoincrement())
+  email                String?
+  fullName             String
+  address              String
+  landmark             String?
+  deliveryInstructions String?
+  area                 String
+  city                 String
+  phoneNumber          String
+  deliveryCharges      Int
+  total                Int
+  grandTotal           Int
+  orderType            String
+  items                Json
+  status               String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  accepted             Boolean? @default(false)
+  shipped              Boolean? @default(false)
+  completed            Boolean? @default(false)
+  // user                 User     @relation(fields: [userId], references: [id])
+  // userId               Int
+}
+
+// model User {
+//   id          Int      @id @default(autoincrement())
+//   email       String?
+//   fullName    String
+//   address     String
+//   createdAt   DateTime @default(now())
+//   phoneNumber String
+//   Order       Order[]
+//   token       String
+//   tokenSecret String
+// }
+
+enum OrderType {
+  DELIVERY
+  PICK_UP
+}
+
+enum Category {
+  PASTA
+  STARTERS
+  PIZZA
+  CHICKEN_BURGER
+  BEEF_BURGER
+  SHAWARMA
+  FRIES
+  BEVERAGES
+}
